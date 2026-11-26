@@ -5,7 +5,7 @@ import pytest
 
 from src.transform_drivers import build_dim_driver
 
-pytestmark = pytest.mark.skip(reason="Story 1: remova esta linha ao implementar")
+#pytestmark = pytest.mark.skip(reason="Story 1: remova esta linha ao implementar")
 
 DATA = Path(__file__).parent / "data"
 
