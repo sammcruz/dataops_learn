@@ -21,4 +21,11 @@ def build_dim_driver(drivers: pd.DataFrame) -> pd.DataFrame:
       4. df["dob"] = pd.to_datetime(df["dob"])
       5. renomeie driverRef para driver_ref e devolva só as colunas pedidas, na ordem
     """
+    df = clean_nulls(drivers)
+    df["full_name"] = df["forename"] + " " + df["surname"]
+    df["driver_id"] = df["driverId"].astype("Int64")
+    df["number"] = df["number"].astype("Int64")
+    df["dob"] = pd.to_datetime(df["dob"])
+    df = df.rename(columns={"driverRef": "driver_ref"})
+    return df[["driver_id", "driver_ref", "code", "full_name", "dob", "nationality", "number"]]
     raise NotImplementedError("Implemente build_dim_driver")
