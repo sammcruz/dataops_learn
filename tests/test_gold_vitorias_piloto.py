@@ -3,7 +3,7 @@ import pytest
 from src.gold_vitorias_piloto import build_gold_vitorias_piloto
 from tests import gold_data
 
-pytestmark = pytest.mark.skip(reason="Gold 1: remova esta linha ao implementar")
+
 
 
 def gerar():
