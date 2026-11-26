@@ -5,8 +5,6 @@ import pytest
 
 from src.transform_constructors import build_dim_constructor
 
-pytestmark = pytest.mark.skip(reason="Story 4: remova esta linha ao implementar")
-
 DATA = Path(__file__).parent / "data"
 
 
