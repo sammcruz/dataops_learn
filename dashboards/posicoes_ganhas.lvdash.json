@@ -1,0 +1,121 @@
+{
+  "datasets": [
+    {
+      "name": "0665382b",
+      "displayName": "gold_posicoes_ganhas",
+      "config": {
+        "version": "1.1",
+        "source": "dataops_learn.f1.gold_posicoes_ganhas",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "e5fa3b7b",
+      "displayName": "Top Ten Winners By Positions Achieved Dataset",
+      "queryLines": [
+        "SELECT\r\n",
+        "    full_name,\r\n",
+        "    SUM(posicoes_ganhas) AS total_posicoes_ganhas\r\n",
+        "FROM gold_posicoes_ganhas\r\n",
+        "GROUP BY full_name\r\n",
+        "ORDER BY total_posicoes_ganhas DESC\r\n",
+        "LIMIT 10;"
+      ],
+      "catalog": "dataops_learn",
+      "schema": "f1"
+    }
+  ],
+  "pages": [
+    {
+      "name": "08f2a57f",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "56251e55",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e5fa3b7b",
+                  "fields": [
+                    {
+                      "name": "total_posicoes_ganhas",
+                      "expression": "`total_posicoes_ganhas`"
+                    },
+                    {
+                      "name": "full_name",
+                      "expression": "`full_name`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "frame": {},
+              "version": 3,
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "total_posicoes_ganhas",
+                  "displayName": "Posições ganhas",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "full_name",
+                  "displayName": "Piloto",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "x-reversed"
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 0,
+            "width": 10,
+            "height": 9
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
