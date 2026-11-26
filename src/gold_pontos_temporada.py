@@ -28,7 +28,11 @@ def build_gold_pontos_temporada(
     df = fact_results.merge(dim_race[["race_id", "season"]], on="race_id")
 
     #2. Agrupar por temporada (número de corridas e soma dos pontos)
-    df = (df.groupby("season").agg(corridas=("race_id", "nunique"), pontos=("points", "sum")).reset_index())
+    df = (
+        df.groupby("season")
+        .agg(corridas=("race_id", "nunique"), pontos=("points", "sum"))
+        .reset_index()
+    )
 
     #3. Ordenar da temporada mais antiga à mais recente
     df["corridas"] = df["corridas"].astype("Int64")

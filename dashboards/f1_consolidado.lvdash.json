@@ -1,0 +1,294 @@
+{
+  "datasets": [
+    {
+      "name": "80822c49",
+      "displayName": "gold_vitorias_piloto",
+      "config": {
+        "version": "1.1",
+        "source": "dataops_learn.f1.gold_vitorias_piloto",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "b5826ce3",
+      "displayName": "TOP10",
+      "queryLines": [
+        "SELECT *\r\n",
+        "FROM gold_vitorias_piloto\r\n",
+        "ORDER BY vitorias DESC\r\n",
+        "LIMIT 10"
+      ],
+      "catalog": "dataops_learn",
+      "schema": "f1"
+    },
+    {
+      "name": "0665382b",
+      "displayName": "gold_posicoes_ganhas",
+      "config": {
+        "version": "1.1",
+        "source": "dataops_learn.f1.gold_posicoes_ganhas",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "e5fa3b7b",
+      "displayName": "Top Ten Winners By Positions Achieved Dataset",
+      "queryLines": [
+        "SELECT\r\n",
+        "    full_name,\r\n",
+        "    SUM(posicoes_ganhas) AS total_posicoes_ganhas\r\n",
+        "FROM gold_posicoes_ganhas\r\n",
+        "GROUP BY full_name\r\n",
+        "ORDER BY total_posicoes_ganhas DESC\r\n",
+        "LIMIT 10;"
+      ],
+      "catalog": "dataops_learn",
+      "schema": "f1"
+    },
+    {
+      "name": "53a0f528",
+      "displayName": "Season Race Points Overview Dataset",
+      "queryLines": [
+        "select season, corridas, pontos\r\n",
+        "from dataops_learn.f1.gold_pontos_temporada\r\n",
+        "order by season"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "f1-painel",
+      "displayName": "Fórmula 1",
+      "layout": [
+        {
+          "widget": {
+            "name": "e0d0435a",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "b5826ce3",
+                  "fields": [
+                    {
+                      "name": "sum(vitorias)",
+                      "expression": "SUM(`vitorias`)"
+                    },
+                    {
+                      "name": "full_name",
+                      "expression": "`full_name`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(vitorias)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "full_name",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "x-reversed"
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              },
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Top 10 pilotos com mais vitórias",
+                  "fields": []
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "56251e55",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "e5fa3b7b",
+                  "fields": [
+                    {
+                      "name": "total_posicoes_ganhas",
+                      "expression": "`total_posicoes_ganhas`"
+                    },
+                    {
+                      "name": "full_name",
+                      "expression": "`full_name`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Top 10 pilotos que mais ganharam posições",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "total_posicoes_ganhas",
+                  "displayName": "Posições ganhas",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "full_name",
+                  "displayName": "Piloto",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "x-reversed"
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "pontos-por-temporada",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "53a0f528",
+                  "fields": [
+                    {
+                      "name": "season",
+                      "expression": "`season`"
+                    },
+                    {
+                      "name": "sum(pontos)",
+                      "expression": "SUM(`pontos`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Pontos por temporada",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "season",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(pontos)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 12,
+            "height": 8
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "f1-filtros",
+      "displayName": "Global Filters",
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
