@@ -123,11 +123,3 @@ display(spark.createDataFrame(resumo, "tabela string, linhas long"))
 # MAGIC %md
 # MAGIC Pronto. Próximo passo: leia a sua story no GitHub, crie a sua branch e implemente a função em `src/`.
 # MAGIC Depois use o notebook `02_transformacoes` para rodar o seu código sobre os dados reais.
-
-# COMMAND ----------
-
-# MAGIC %sql
-# MAGIC select * from dataops_learn.f1.bronze_constructors
-
-# COMMAND ----------
-
