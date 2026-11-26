@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pandas as pd
+
 from src.transform_results import build_fact_results
 
 DATA = Path(__file__).parent / "data"

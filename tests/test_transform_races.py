@@ -1,11 +1,8 @@
 from pathlib import Path
 
 import pandas as pd
-import pytest
 
 from src.transform_races import build_dim_race
-
-
 
 DATA = Path(__file__).parent / "data"
 
