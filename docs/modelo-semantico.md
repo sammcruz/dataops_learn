@@ -163,10 +163,10 @@ erDiagram
 | 1. Pilotos | `drivers` | `silver_dim_driver` |
 | 2. Corridas e circuitos | `races` + `circuits` | `silver_dim_race` |
 | 3. Resultados | `results` + `status` | `silver_fact_results` |
-| Professora (gold) | as três silvers | KPIs e painel |
+| 4. Equipes | `constructors` | `silver_dim_constructor` |
 
-Na gold, `silver_fact_results` liga a `silver_dim_driver` por `driver_id` e a `silver_dim_race` por
-`race_id`: é a estrela do projeto.
+Depois dos quatro PRs, `silver_fact_results` liga a `silver_dim_driver` por `driver_id`, a
+`silver_dim_race` por `race_id` e a `silver_dim_constructor` por `constructor_id`: é a estrela do projeto.
 
 ## Pegadinhas conhecidas
 

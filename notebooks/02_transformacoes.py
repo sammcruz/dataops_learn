@@ -80,19 +80,12 @@ gravar(fact_results, "silver_fact_results")
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Gold (professora): integração e painel
-# MAGIC Depois que os três PRs forem aprovados, as tabelas `silver_*` se juntam por `race_id` e `driver_id`.
-# MAGIC Exemplos de perguntas: quem mais venceu, circuitos com as voltas mais rápidas, quem mais ganha
-# MAGIC posições na largada.
+# MAGIC ## Story 4: equipes (`dim_constructor`)
 
 # COMMAND ----------
 
-# Exemplo para a professora (rode depois dos três PRs):
-# vitorias = spark.sql(f"""
-#   SELECT d.full_name, COUNT(*) AS vitorias
-#   FROM {CATALOGO}.{SCHEMA}.silver_fact_results f
-#   JOIN {CATALOGO}.{SCHEMA}.silver_dim_driver d ON d.driver_id = f.driver_id
-#   WHERE f.finish_position = 1
-#   GROUP BY d.full_name ORDER BY vitorias DESC LIMIT 10
-# """)
-# display(vitorias)
+from src.transform_constructors import build_dim_constructor
+
+dim_constructor = build_dim_constructor(ler("constructors"))
+display(dim_constructor.head(10))
+gravar(dim_constructor, "silver_dim_constructor")
