@@ -1,9 +1,6 @@
-import pytest
 
 from src.gold_vitorias_piloto import build_gold_vitorias_piloto
 from tests import gold_data
-
-
 
 
 def gerar():

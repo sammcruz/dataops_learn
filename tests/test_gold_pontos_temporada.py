@@ -1,5 +1,4 @@
 import pandas as pd
-import pytest
 
 from src.gold_pontos_temporada import build_gold_pontos_temporada
 from tests import gold_data
