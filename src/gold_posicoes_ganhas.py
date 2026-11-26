@@ -24,4 +24,33 @@ def build_gold_posicoes_ganhas(
       5. Ordene por posicoes_ganhas (maior primeiro) e depois por full_name
       6. Devolva só as colunas pedidas, na ordem, com reset_index(drop=True)
     """
+    df = (
+        fact_results.groupby("driver_id")
+        .agg(
+            corridas=("positions_gained", "count"),
+            posicoes_ganhas=("positions_gained", "sum")
+        )
+        .reset_index()
+    )
+
+    df = df[df["corridas"] > 0]
+
+    df = df.merge(
+        dim_driver[["driver_id", "full_name"]],
+        on="driver_id",
+        how="left"
+    )
+
+    df["corridas"] = df["corridas"].astype("Int64")
+    df["posicoes_ganhas"] = df["posicoes_ganhas"].astype("Int64")
+
+    df = df.sort_values(
+        by=["posicoes_ganhas", "full_name"],
+        ascending=[False, True]
+    )
+
+    return df[
+        ["driver_id", "full_name", "corridas", "posicoes_ganhas"]
+    ].reset_index(drop=True)
+
     raise NotImplementedError("Implemente build_gold_posicoes_ganhas")

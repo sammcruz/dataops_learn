@@ -1,10 +1,6 @@
-import pytest
-
 from src.gold_posicoes_ganhas import build_gold_posicoes_ganhas
+
 from tests import gold_data
-
-pytestmark = pytest.mark.skip(reason="Gold 2: remova esta linha ao implementar")
-
 
 def gerar():
     return build_gold_posicoes_ganhas(gold_data.fact_results(), gold_data.dim_driver())
