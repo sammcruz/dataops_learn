@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# ///
 # MAGIC %md
 # MAGIC # 02. Transformações (silver)
 # MAGIC
@@ -7,6 +11,10 @@
 # MAGIC
 # MAGIC As funções recebem DataFrames pandas (as tabelas de F1 são pequenas). Os testes automáticos
 # MAGIC do GitHub usam as mesmas funções com amostras em `tests/data/`.
+
+# COMMAND ----------
+
+dbutils.library.restartPython()
 
 # COMMAND ----------
 
