@@ -23,7 +23,6 @@ Passo a passo para contribuir: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 | `tests/` | Testes automáticos, com amostras pequenas em `tests/data/` |
 | `docs/modelo-semantico.md` | Como as tabelas de F1 se relacionam |
 | `.github/workflows/ci.yml` | Lint (`ruff`) e testes (`pytest`) a cada Pull Request |
-| `notebooks/00_teste_kaggle.py` | Teste isolado de conexão com o Kaggle |
 
 ## Rodar os testes na sua máquina
 
