@@ -18,8 +18,5 @@ def build_dim_constructor(constructors: pd.DataFrame) -> pd.DataFrame:
   #3. Converter o constructor_id para Int64
   df["constructor_id"] = df["constructor_id"].astype("Int64")
 
-  #3.1. Pôr nationality mais bonita
-  df["nationality"] = df["nationality"].str.upper()
-
   #4. Devolver as colunas constructor_id, constructor_ref, name, nationality
   return df[["constructor_id", "constructor_ref", "name", "nationality"]]
