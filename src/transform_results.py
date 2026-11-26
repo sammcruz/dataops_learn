@@ -4,7 +4,9 @@ Entrada: DataFrames `results` e `status` como chegam da bronze (tudo texto, `\\N
 """
 
 import pandas as pd
+
 from src.common import clean_nulls
+
 
 def build_fact_results(results: pd.DataFrame, status: pd.DataFrame) -> pd.DataFrame:
     r = clean_nulls(results).rename(
