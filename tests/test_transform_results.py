@@ -5,8 +5,6 @@ import pytest
 
 from src.transform_results import build_fact_results
 
-pytestmark = pytest.mark.skip(reason="Story 3: remova esta linha ao implementar")
-
 DATA = Path(__file__).parent / "data"
 
 
