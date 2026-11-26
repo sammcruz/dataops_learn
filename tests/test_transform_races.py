@@ -5,7 +5,7 @@ import pytest
 
 from src.transform_races import build_dim_race
 
-pytestmark = pytest.mark.skip(reason="Story 2: remova esta linha ao implementar")
+
 
 DATA = Path(__file__).parent / "data"
 
