@@ -1,0 +1,5 @@
+driverId,driverRef,number,code,forename,surname,dob,nationality,url
+1,hamilton,44,HAM,Lewis,Hamilton,1985-01-07,British,http://example.org/1
+2,heidfeld,\N,HEI,Nick,Heidfeld,1977-05-10,German,\N
+3,verstappen,33,VER,  Max ,Verstappen,1997-09-30,Dutch,\N
+4,fangio,\N,\N,Juan,Fangio,1911-06-24,Argentine,\N
