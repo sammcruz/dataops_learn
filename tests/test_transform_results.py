@@ -1,12 +1,9 @@
 from pathlib import Path
 
 import pandas as pd
-import pytest
-
 from src.transform_results import build_fact_results
 
 DATA = Path(__file__).parent / "data"
-
 
 def carregar():
     kw = dict(dtype=str, keep_default_na=False)
