@@ -4,8 +4,6 @@ import pytest
 from src.gold_pontos_temporada import build_gold_pontos_temporada
 from tests import gold_data
 
-pytestmark = pytest.mark.skip(reason="Gold 3: remova esta linha ao implementar")
-
 
 def gerar():
     return build_gold_pontos_temporada(gold_data.fact_results(), gold_data.dim_race())

@@ -1,0 +1,87 @@
+{
+  "datasets": [
+    {
+      "name": "53a0f528",
+      "displayName": "Season Race Points Overview Dataset",
+      "queryLines": [
+        "select season, corridas, pontos\r\n",
+        "from dataops_learn.f1.gold_pontos_temporada\r\n",
+        "order by season"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "036cd809",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "pontos-por-temporada",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "53a0f528",
+                  "fields": [
+                    {
+                      "name": "season",
+                      "expression": "`season`"
+                    },
+                    {
+                      "name": "sum(pontos)",
+                      "expression": "SUM(`pontos`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Pontos por temporada",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "season",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(pontos)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 1,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
