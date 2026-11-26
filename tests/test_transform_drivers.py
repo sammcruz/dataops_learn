@@ -1,10 +1,9 @@
-import datetime as dt
 from pathlib import Path
 
 import pandas as pd
 import pytest
 
-from src.transform_drivers import age_on, build_dim_driver
+from src.transform_drivers import build_dim_driver
 
 pytestmark = pytest.mark.skip(reason="Story 1: remova esta linha ao implementar")
 
@@ -45,15 +44,3 @@ def test_tipos():
     assert str(out["driver_id"].dtype) == "Int64"
     assert str(out["number"].dtype) == "Int64"
     assert pd.api.types.is_datetime64_any_dtype(out["dob"])
-
-
-def test_idade_completa():
-    assert age_on(dt.date(1985, 1, 7), dt.date(2009, 3, 29)) == 24
-
-
-def test_idade_antes_do_aniversario():
-    assert age_on(dt.date(1985, 1, 7), dt.date(2009, 1, 6)) == 23
-
-
-def test_idade_no_dia_do_aniversario():
-    assert age_on(dt.date(1985, 1, 7), dt.date(2009, 1, 7)) == 24

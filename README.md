@@ -16,6 +16,7 @@ Passo a passo para contribuir: [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 | Pasta | Conteúdo |
 |---|---|
+| `notebooks/00_introducao.py` | Introdução ao projeto, com o diagrama das tabelas de F1 |
 | `notebooks/01_ingestao_f1.py` | Baixa o dataset do Kaggle e cria as tabelas bronze (igual para todos) |
 | `notebooks/02_transformacoes.py` | Roda as funções de `src/` sobre os dados reais e grava as tabelas silver |
 | `src/` | Funções de transformação, uma por story. **É aqui que você trabalha** |

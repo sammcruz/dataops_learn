@@ -8,29 +8,24 @@ import pandas as pd
 from src.common import clean_nulls  # noqa: F401  (use na sua implementação)
 
 
-def lap_time_to_ms(value) -> "int | None":
-    """Converte o tempo de volta em milissegundos.
-
-    Exemplos: "1:27.452" -> 87452 ; "59.900" -> 59900 ; "\\N", "" ou nulo -> None
-    """
-    raise NotImplementedError("Implemente lap_time_to_ms")
-
-
 def build_fact_results(results: pd.DataFrame, status: pd.DataFrame) -> pd.DataFrame:
     """Monta a tabela de fatos de resultados.
 
     Colunas de saída, nesta ordem:
-      result_id, race_id, driver_id, constructor_id, grid, finish_position, positions_gained,
-      points (float), laps, status, is_finished (bool), fastest_lap_ms
-      (as colunas de identificação, grid, finish_position, positions_gained, laps e
-       fastest_lap_ms são Int64, com nulo quando não houver valor)
+      result_id, race_id, driver_id, constructor_id, grid, finish_position,
+      positions_gained (todas Int64), points (float), status (texto)
 
-    Regras:
-      - finish_position vem de `position` (nulo quando o piloto não terminou)
-      - positions_gained = grid - finish_position, só quando grid > 0 e há finish_position
-        (grid 0 significa largada dos boxes: nulo)
-      - status vem do join com a tabela `status` pelo statusId
-      - is_finished é verdadeiro quando status é "Finished" ou começa com "+" (voltas atrás)
-      - fastest_lap_ms usa lap_time_to_ms sobre `fastestLapTime`
+    Passo a passo:
+      1. results = clean_nulls(results) e status = clean_nulls(status)
+      2. Renomeie: resultId -> result_id, raceId -> race_id, driverId -> driver_id,
+         constructorId -> constructor_id, position -> finish_position
+      3. Converta result_id, race_id, driver_id, constructor_id, grid e finish_position
+         com astype("Int64") e points com astype(float)
+      4. positions_gained = grid - finish_position
+         MAS grid 0 significa largada dos boxes: nesse caso deixe nulo.
+         Dica: df["positions_gained"] = df["positions_gained"].where(df["grid"] > 0)
+         (quem não terminou já fica nulo sozinho, porque finish_position é nulo)
+      5. Junte com `status` pelo statusId (how="left") para trazer o texto da coluna `status`
+      6. Devolva só as colunas pedidas, na ordem
     """
     raise NotImplementedError("Implemente build_fact_results")
